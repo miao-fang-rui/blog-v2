@@ -1,0 +1,72 @@
+:root {
+    scroll-behavior: smooth;
+    --vp-c-accent: #5a72fe;
+    --vp-c-accent-bg: #5a72fe;
+    --vp-c-accent-hover: #7589ff;
+    --vp-c-accent-text: var(--vp-c-white);
+    --vp-c-accent-soft: rgb(16 185 129 / 14%);
+
+    .vp-hero-action-button:hover {
+        color: #fff;
+        background-color: var(--vp-c-accent-hover);
+        border-color: var(--vp-c-accent-hover);
+    }
+
+    :not(pre)>code {
+        color: rgb(255, 73, 73);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        letter-spacing: 1px;
+        padding: 4px 6px;
+        margin: 0 4px;
+        background-color: var(--vp-c-grey-bg) !important;
+    }
+
+    div[class*=language-] pre::-webkit-scrollbar {
+        height: 6px !important;
+
+    }
+
+    div[class*=language-] pre:hover::-webkit-scrollbar-thumb {
+        background-color: var(--vp-c-accent) !important;
+        border-radius: 3px !important;
+    }
+
+    div[class*=language-] pre::-webkit-scrollbar-thumb:hover {
+        cursor: pointer !important;
+    }
+
+    .el-popup-parent--hidden{
+        .el-overlay{
+            z-index: 9999 !important;
+        }
+    }
+
+    .el-overlay{
+        z-index: 9999 !important;
+    }
+
+    .el-message {
+        z-index: 10000 !important;
+    }
+
+    .el-cascader-node.in-active-path, .el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path{
+        color: var(--vp-c-accent) !important;
+    }
+    
+}
+
+
+[data-theme='dark'] {
+    .el-card {
+        background-color: var(--vp-c-bg);
+        border: 1px solid var(--vp-c-border)
+    }
+
+    .el-card__footer {
+        border-top: 1px solid var(--vp-c-border)
+    }
+
+    .el-card.is-hover-shadow:hover {
+        box-shadow: var(--el-box-shadow-dark);
+    }
+}
