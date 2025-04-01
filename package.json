@@ -56,7 +56,8 @@
     "jspdf": "^3.0.0",
     "jszip": "^3.10.1",
     "lowlight": "^3.3.0",
-    "prosemirror-markdown": "^1.13.1"
+    "prosemirror-markdown": "^1.13.1",
+    "vue-router": "4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
