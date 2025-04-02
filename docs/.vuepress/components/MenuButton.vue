@@ -31,8 +31,8 @@ const emit = defineEmits(["handleClick"])
     background-color: var(--vp-c-bg);
 
     &:hover {
-        background-color: var(--vp-c-grey-hover);
-        // background-color: #e5e9ff;
+        // background-color: var(--vp-c-grey-hover);
+        background-color: #e5e9ff;
         color: var(--vp-c-accent);
     }
 

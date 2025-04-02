@@ -230,7 +230,7 @@ onUnmounted(() => {
         height: auto;
         min-height: 50px;
         padding: 10px;
-        box-shadow: 0 0 3px 0px rgba(0, 0, 0, .1);
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, .1);
     }
 
     .editor-container{
@@ -391,27 +391,27 @@ onUnmounted(() => {
         color: var(--vp-c-border);
         font-size: 14px;
     }
-    h1::before {
+    h1:hover::before {
         content: 'H1';
     }
 
-    h2::before {
+    h2:hover::before {
         content: 'H2';
     }
 
-    h3::before {
+    h3:hover::before {
         content: 'H3';
     }
 
-    h4::before {
+    h4:hover::before {
         content: 'H4';
     }
 
-    h5::before {
+    h5:hover::before {
         content: 'H5';
     }
 
-    h6::before {
+    h6:hover::before {
         content: 'H6';
     }
 
