@@ -3,7 +3,7 @@ export const imgToElImgPlugin = (options) => (app) => ({
     extendsMarkdown: (md) => {
         md.renderer.rules.image = (tokens, idx, options, env, self) => {
             const token = tokens[idx]
-            const src = '/blog/'+ token.attrGet('src')
+            const src = env.base + token.attrGet('src')
             const width = token?.attrGet('width')? token?.attrGet('width')+ 'px' : '100%';
             const height = token?.attrGet('height')? token?.attrGet('height')+ 'px' : '100%';
             const alt = token.content

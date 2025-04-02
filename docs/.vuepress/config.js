@@ -20,7 +20,11 @@ export default defineUserConfig({
             description: '天迈文档中心',
         },
     },
-    markdown: {},
+    markdown: {
+        assets: {
+            absolutePathPrependBase: true
+        }
+    },
     plugins: [
         imgToElImgPlugin(),
         markdownImagePlugin({
