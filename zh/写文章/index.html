@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.20" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <title>天迈科技</title><meta name="description" content="天迈文档中心">
+    <link rel="preload" href="/blog-v2/assets/style-OLGRN1QQ.css" as="style"><link rel="stylesheet" href="/blog-v2/assets/style-OLGRN1QQ.css">
+    <link rel="modulepreload" href="/blog-v2/assets/app-B5uABlXE.js"><link rel="modulepreload" href="/blog-v2/assets/index.html-9kgDhk1R.js">
+    <link rel="prefetch" href="/blog-v2/assets/index.html--x-6LSAY.js" as="script"><link rel="prefetch" href="/blog-v2/assets/index.html-CwAGITE9.js" as="script"><link rel="prefetch" href="/blog-v2/assets/VehicleScheduling.html-B8_7THxq.js" as="script"><link rel="prefetch" href="/blog-v2/assets/VehicleScheduling.html-CDq2tsoE.js" as="script"><link rel="prefetch" href="/blog-v2/assets/车载调度.html-BGyrTmG_.js" as="script"><link rel="prefetch" href="/blog-v2/assets/TM5805.html-DRB0vf-y.js" as="script"><link rel="prefetch" href="/blog-v2/assets/404.html-C1ImOLp6.js" as="script"><link rel="prefetch" href="/blog-v2/assets/html2canvas.esm-CBrSDip1.js" as="script"><link rel="prefetch" href="/blog-v2/assets/jspdf.es.min-B5jXQMtT.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!----><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/blog-v2/assets/app-B5uABlXE.js" defer></script>
+  </body>
+</html>
