@@ -50,7 +50,7 @@ const header = ref(null)
 const aside = ref(null)
 const headerHeight = ref(0)
 const content = ref("")
-const isShowMabigat = ref(true)
+const isShowNavigit = ref(true)
 
 useResizeObserver(header, (entries) => {
     const entry = entries[0]
@@ -126,7 +126,7 @@ function goBack() {
 }
 
 const handleSide = () => {
-    isShowMabigat.value = !isShowMabigat.value
+    isShowNavigit.value = !isShowNavigit.value
 }
 
 onMounted(() => {
@@ -146,7 +146,7 @@ onUnmounted(() => {
         <el-container class="common-layout">
             <el-header ref="header" class="header no-print"><Menubar :editor="editor" /></el-header>
             <el-container class="editor-container">
-                <el-aside v-show="isShowMabigat" width="260px" class="aside hidden-sm-and-down no-print" ref="aside">
+                <el-aside v-show="isShowNavigit" width="260px" class="aside hidden-sm-and-down no-print" ref="aside">
                     <Navigat :editor="editor" />
                 </el-aside>
                 <el-main class="main">
@@ -155,7 +155,7 @@ onUnmounted(() => {
             </el-container>
             <div class="right-btn no-print">
                 <div class="go-back">
-                    <el-tooltip content="隐藏导航栏" placement="left" :show-after="200">
+                    <el-tooltip :content="isShowNavigit? '隐藏导航栏': '显示导航栏'" placement="left" :show-after="200">
                         <el-button class="more-btn" text bg circle @click="handleSide"><el-icon :size="20">
                             <Sidebar />
                         </el-icon></el-button>
