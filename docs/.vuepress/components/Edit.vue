@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onUnmounted, onMounted } from 'vue'
+import { ref, watch, onUnmounted, onMounted, toRaw } from 'vue'
 import { useResizeObserver } from '@vueuse/core'
 import { useEditor, EditorContent, VueNodeViewRenderer } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
@@ -105,7 +105,55 @@ const editor = useEditor({
     ],
     onUpdate: () => {
         content.value = editor.value.getJSON()
-        localStorage.setItem('blog-content', JSON.stringify(content.value))
+        console.log(content.value)
+
+        // 打开数据库
+        var request = indexedDB.open('DocsDB', 1);
+
+        request.onupgradeneeded = function(event) {
+            var db = event.target.result;
+            // 创建仅首次或版本更新时执行
+            if (!db.objectStoreNames.contains('docs')) {
+                db.createObjectStore('docs', { 
+                    // keyPath: 'docsId',
+                    autoIncrement: false // 使用自动生成的ID
+                });
+            }
+        };
+
+        request.onsuccess = function(event) {
+            var db = event.target.result;
+            
+            // 开启事务存储数据
+            var transaction = db.transaction(['docs'], 'readwrite');
+            var objectStore = transaction.objectStore('docs');
+            
+            // 添加数据
+            const key = 'docsId'
+            const checkKey = objectStore.getKey(key)
+
+            checkKey.onsuccess = () => {
+                if(checkKey.result === undefined){
+                    objectStore.add(toRaw(content.value), key)
+                }else{
+                    objectStore.put(toRaw(content.value), key)
+                }
+            }
+
+            transaction.oncomplete = () => {
+                console.log('Docs stored successfully');
+            };
+
+            transaction.onerror = (event) => {
+                console.error('Transaction error:', event.target.error);
+            };
+        };
+
+        request.onerror = function(event) {
+            console.error('Database open error:', event.target.error);
+        };
+
+        // localStorage.setItem('blog-content', JSON.stringify(content.value))
     },
     onTransaction({ editor, transaction }) {
     },
@@ -121,6 +169,7 @@ const editor = useEditor({
     }
 })
 
+
 function goBack() {
     router.go(-1);
 }
@@ -131,8 +180,65 @@ const handleSide = () => {
 
 onMounted(() => {
     if (editor.value) {
-        const getJson = JSON.parse(localStorage.getItem('blog-content'))
-        editor.value.commands.setContent(getJson)
+
+        var request = indexedDB.open('DocsDB', 1);
+
+        request.onupgradeneeded = function(event) {
+            var db = event.target.result;
+            // 创建仅首次或版本更新时执行
+            if (!db.objectStoreNames.contains('docs')) {
+                db.createObjectStore('docs', { 
+                    // keyPath: 'docsId',
+                    autoIncrement: false // 使用自动生成的ID
+                });
+            }
+        };
+
+        request.onsuccess = function(event) {
+            var db = event.target.result;
+            
+            // 开启事务存储数据
+            var transaction = db.transaction(['docs'], 'readonly');
+            var objectStore = transaction.objectStore('docs');
+            
+            // 添加数据
+            // objectStore.add(toRaw(content.value));
+            const key = 'docsId'
+            const checkKey = objectStore.getKey(key)
+
+            checkKey.onsuccess = () => {
+                if(checkKey.result !== undefined){ 
+                    const request = objectStore.get(key)
+
+                    request.onsuccess = (e) => {
+                        const data = e.target.result; // 获取到匹配键名的数据
+                        if (data) {
+                            console.log('数据:', data);
+                            editor.value.commands.setContent(data)
+                        } else {
+                            console.warn('键名不存在');
+                        }
+                    };
+                    request.onerror = (e) => {
+                        console.error('查询失败:', e.target.error);
+                    };
+                    
+                }
+            }
+
+            transaction.oncomplete = () => {
+                console.log('Docs stored successfully');
+            };
+
+            transaction.onerror = (event) => {
+                console.error('Transaction error:', event.target.error);
+            };
+        };
+
+        request.onerror = function(event) {
+            console.error('Database open error:', event.target.error);
+        };
+
     }
 })
 

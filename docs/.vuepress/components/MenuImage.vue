@@ -27,85 +27,22 @@ const form = reactive({
     height: 0,
 })
 
-// const uploadImg = async(uploadFile) => {
+const uploadImg = async(uploadFile) => {
     
-    // const reader = new FileReader();
-
-    // reader.onload = (e) => {
-        
-    //     const base64String = e.target.result;
-
-    //     editor.chain().focus().setImage({
-    //         src: base64String,
-    //         alt: uploadFile.name,
-    //         title: uploadFile.name,
-    //     }).run()
-    // }
-    // reader.readAsDataURL(uploadFile.raw);
-// }
-
-const uploadImg = async (uploadFile) => {
-    // 读取文件为Base64
     const reader = new FileReader();
-    
+
     reader.onload = (e) => {
+        
         const base64String = e.target.result;
 
-        // 打开数据库
-        var request = indexedDB.open('BlobImageDB', 1);
-
-        request.onupgradeneeded = function(event) {
-            var db = event.target.result;
-            // 创建图片存储表（仅首次或版本更新时执行）
-            if (!db.objectStoreNames.contains('images')) {
-                var objectStore = db.createObjectStore('images', { 
-                    keyPath: 'id',
-                    autoIncrement: true // 使用自动生成的ID
-                });
-                objectStore.createIndex('name', 'name', { unique: false });
-            }
-        };
-
-        request.onsuccess = function(event) {
-            var db = event.target.result;
-            
-            // 开启事务存储图片数据
-            var transaction = db.transaction(['images'], 'readwrite');
-            var objectStore = transaction.objectStore('images');
-            
-            // 构造要存储的数据对象
-            const imageData = {
-                name: uploadFile.name,
-                src: base64String,
-                uploadedAt: new Date()
-            };
-
-            // 添加数据
-            objectStore.add(imageData);
-
-            transaction.oncomplete = () => {
-                console.log('Image stored successfully');
-                // 插入编辑器（成功后执行）
-                editor.chain().focus().setImage({
-                src: base64String,
-                alt: uploadFile.name,
-                title: uploadFile.name,
-                }).run();
-            };
-
-            transaction.onerror = (event) => {
-                console.error('Transaction error:', event.target.error);
-            };
-        };
-
-        request.onerror = function(event) {
-            console.error('Database open error:', event.target.error);
-        };
-    };
-
-    // 读取文件内容（原始文件在uploadFile.raw中）
+        editor.chain().focus().setImage({
+            src: base64String,
+            alt: uploadFile.name,
+            title: uploadFile.name,
+        }).run()
+    }
     reader.readAsDataURL(uploadFile.raw);
-};
+}
 
 
 const imageButtons = [
