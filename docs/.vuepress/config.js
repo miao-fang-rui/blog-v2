@@ -8,6 +8,9 @@ import { markdownStylizePlugin } from '@vuepress/plugin-markdown-stylize'
 export default defineUserConfig({
     base: '/blog-v2/',
     pagePatterns: ['**/*.md', '!**/README.md', '!.vuepress', '!node_modules'],
+    head: [
+        ['link', { rel: 'icon', href: 'favicon.ico' }]
+    ],
     locales: {
         '/': {
             lang: 'en-US',
