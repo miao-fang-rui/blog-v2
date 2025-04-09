@@ -76,7 +76,7 @@ const dialogBeforeClose = (done) => {
 const getMarkdownFile = () => {
 
     const blogData = localStorage.getItem('blog');
-    const articleLocalStorage = JSON.parse(localStorage.getItem('blog-content'))
+    const articleLocalStorage = editor.getJSON()
 
     if (!blogData) return;
 
