@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.20" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <link rel="icon" href="favicon.ico"><title>天迈科技</title><meta name="description" content="天迈文档中心">
+    <link rel="preload" href="/blog-v2/assets/style-x4iNAgUu.css" as="style"><link rel="stylesheet" href="/blog-v2/assets/style-x4iNAgUu.css">
+    <link rel="modulepreload" href="/blog-v2/assets/app-BWyr-0sP.js"><link rel="modulepreload" href="/blog-v2/assets/index.html-BMfS2nNi.js">
+    <link rel="prefetch" href="/blog-v2/assets/index.html-DCB1g2uf.js" as="script"><link rel="prefetch" href="/blog-v2/assets/login.html-B_ZHc29W.js" as="script"><link rel="prefetch" href="/blog-v2/assets/index.html-JoT0VnQf.js" as="script"><link rel="prefetch" href="/blog-v2/assets/VehicleScheduling.html-da3koAoe.js" as="script"><link rel="prefetch" href="/blog-v2/assets/VehicleScheduling.html-DDmPHdNS.js" as="script"><link rel="prefetch" href="/blog-v2/assets/车载调度.html-DaMIWRjF.js" as="script"><link rel="prefetch" href="/blog-v2/assets/TM8765N.html-DgomHL_S.js" as="script"><link rel="prefetch" href="/blog-v2/assets/TM5805.html-CTHYrhqm.js" as="script"><link rel="prefetch" href="/blog-v2/assets/404.html-BsGyDc52.js" as="script"><link rel="prefetch" href="/blog-v2/assets/html2canvas.esm-CBrSDip1.js" as="script"><link rel="prefetch" href="/blog-v2/assets/jspdf.es.min-embx-j3x.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!----><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/blog-v2/assets/app-BWyr-0sP.js" defer></script>
+  </body>
+</html>
