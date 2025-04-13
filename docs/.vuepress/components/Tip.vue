@@ -109,9 +109,8 @@ export default {
     border: 1px solid #989898;
 
     .tip-content {
-        padding: 10px;
-        margin-top: 6px;
-        border-radius: 4px;
+        padding: 10px 10px 0 10px;
+        font-size: 14px;
     }
 
     .tip-text {
@@ -149,11 +148,22 @@ export default {
             .el-input__wrapper{
                 background-color: transparent;
                 box-shadow: none;
+                
+                .el-input__inner{
+                    font-weight: 800;
+                    color: black;
+                }
             }
 
             .el-select__wrapper{
                 background-color: transparent;
                 box-shadow: none;
+                
+
+                .el-select__placeholder{
+                    font-weight: 800;
+                    color: black;
+                }
             }
         }
     }
