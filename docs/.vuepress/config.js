@@ -32,7 +32,7 @@ export default defineUserConfig({
         imgToElImgPlugin(),
         markdownImagePlugin({
             // 启用 figure
-            // figure: true,
+            figure: true,
             // 启用图片懒加载
             lazyload: true,
             // 启用图片标记

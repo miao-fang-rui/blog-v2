@@ -52,6 +52,16 @@
     .el-cascader-node.in-active-path, .el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path{
         color: var(--vp-c-accent) !important;
     }
+
+    table {
+        font-size: 14px;
+        display: table;
+        width: 100%;
+    }
+
+    .el-image-viewer__mask{
+        opacity: 0.8;
+    }
     
 }
 

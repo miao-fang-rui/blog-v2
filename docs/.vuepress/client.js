@@ -10,6 +10,7 @@ import NotFound from './components/NotFound.vue'
 import Layout from './layouts/Layout.vue'
 import Edit from './components/Edit.vue'
 import Login from './components/Login.vue'
+import Carousel from './components/Carousel.vue'
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
@@ -19,6 +20,7 @@ export default defineClientConfig({
         }
         app.component('Products', Products)
         app.component('ElImageI18n', ElImageI18n)
+        app.component('Carousel', Carousel)
 
         if (typeof window !== "undefined") {
             // 在浏览器环境下执行 sessionStorage 相关操作
