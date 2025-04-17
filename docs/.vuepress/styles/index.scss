@@ -58,9 +58,12 @@
         display: table;
         width: 100%;
     }
-
+    .el-image-viewer__wrapper:focus{
+        backdrop-filter: blur(2px);
+    }
     .el-image-viewer__mask{
-        opacity: 0.8;
+        // opacity: .7;
+        // filter: blur(10px);
     }
     
 }
