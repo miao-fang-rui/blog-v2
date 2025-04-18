@@ -59,11 +59,19 @@
         width: 100%;
     }
     .el-image-viewer__wrapper:focus{
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(8px);
     }
     .el-image-viewer__mask{
-        // opacity: .7;
+        opacity: .1;
         // filter: blur(10px);
+    }
+
+    [vp-content] img {
+        box-shadow: 1px 0px 19px 0px rgba(0, 0, 0, .5);
+    }
+
+    .el-image-viewer__canvas img{
+        box-shadow: 1px 0px 19px 0px rgba(0, 0, 0, .5);
     }
     
 }
