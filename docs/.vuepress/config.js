@@ -243,16 +243,16 @@ export default defineUserConfig({
                             text: '调试及维修',
                             children: [
                                 {
-                                    text: '车载调度产品',
-                                    link: '/zh/文章/车载调度产品.md',
+                                    text: '车载调度',
+                                    link: '/zh/文章/车载调度.md',
                                 },
                                 {
-                                    text: '主动安全产品',
-                                    link: '/zh/文章/主动安全产品.md',
+                                    text: '主动安全',
+                                    link: '/zh/文章/主动安全.md',
                                 },
                                 {
-                                    text: '智慧收银产品',
-                                    link: '/zh/文章/智慧收银产品.md',
+                                    text: '智慧收银',
+                                    link: '/zh/文章/智慧收银.md',
                                 },
                             ]
                         }

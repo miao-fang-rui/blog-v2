@@ -69,6 +69,29 @@
     .el-image-viewer__mask{
         opacity: .1;
     }
+
+    .el-collapse{
+
+        .el-collapse-item__header {
+            color: var(--vp-c-accent);
+        }
+    }
+
+    .el-tabs {
+
+        .el-tabs__active-bar {
+            background-color: var(--vp-c-accent);
+        }
+
+        .el-tabs__item {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .el-tabs__item.is-active, .el-tabs__item:hover {
+            color: var(--vp-c-accent);
+        }
+    }
     
 }
 
@@ -85,5 +108,18 @@
 
     .el-card.is-hover-shadow:hover {
         box-shadow: var(--el-box-shadow-dark);
+    }
+
+    .el-collapse{
+        --el-collapse-border-color: var(--vp-c-border);
+
+        .el-collapse-item__header {
+            background-color: var(--vp-c-bg);
+            border-bottom: 1px solid var(--vp-c-border);
+            color: var(--vp-c-accent);
+        }
+        .el-collapse-item__wrap{
+            background-color: var(--vp-c-bg);
+        }
     }
 }
