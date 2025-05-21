@@ -23,7 +23,7 @@ const activeName = defineModel('activeName')
 .tabs {
     margin-top: 20px;
     padding: 20px;
-    background-color: color-mix(in srgb, var(--vp-c-accent) 4%, transparent);
+    // background-color: color-mix(in srgb, var(--vp-c-accent) 4%, transparent);
     border-radius: 5px;
     border: 1px solid var(--vp-c-gutter);
     box-shadow: transparent;
