@@ -162,7 +162,7 @@ rm /mnt/flash/schedule/sch_para.json -rf
 cat /proc/umap/venc
 ```
 
-## 16、删除指定时间的文件
+## 15、删除指定时间的文件
 
 ```bash
 # 删除30天内的日志
