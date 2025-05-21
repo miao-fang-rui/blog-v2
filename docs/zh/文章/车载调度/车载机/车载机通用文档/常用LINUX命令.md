@@ -62,7 +62,7 @@ flash_eraseall /dev/mtd11
 flash_eraseall /dev/mtd8
 ```
 
-![8731远程格式化nand.png](/articles/常用LINUX命令/8731远程格式化nand.png )
+![8731远程格式化nand](/articles/常用LINUX命令/8731远程格式化nand.png )
 
 ## 7、上传和下载命令
 
@@ -129,11 +129,11 @@ find ./ -inum 12345 -exec rm {} -rf \;
 find -inum 12345 -delete
 ```
 
-![删除特殊文件1.png](/articles/常用LINUX命令/删除特殊文件1.png )
+![删除特殊文件1](/articles/常用LINUX命令/删除特殊文件1.png )
 
-![删除特殊文件2.png](/articles/常用LINUX命令/删除特殊文件2.png )
+![删除特殊文件2](/articles/常用LINUX命令/删除特殊文件2.png )
 
-![删除特殊文件3.png](/articles/常用LINUX命令/删除特殊文件3.png )
+![删除特殊文件3](/articles/常用LINUX命令/删除特殊文件3.png )
 
 ## 11、查看十六进制文件
 
@@ -169,5 +169,5 @@ cat /proc/umap/venc
 find /mnt/nand/log/ -type f -mtime +30 -exec rm -f {} \;
 ```
 
-![删除指定时间的文件.png](/articles/常用LINUX命令/删除指定时间的文件.png )
+![删除指定时间的文件](/articles/常用LINUX命令/删除指定时间的文件.png )
 

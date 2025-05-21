@@ -11,7 +11,7 @@ import Layout from './layouts/Layout.vue'
 import Edit from './components/Edit.vue'
 import Login from './components/Login.vue'
 import Carousel from './components/Carousel.vue'
-import CollapseMenu from './components/CollapseMenu.vue'
+import ElTabMenus from './components/ElTabMenus.vue'
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
@@ -22,7 +22,7 @@ export default defineClientConfig({
         app.component('Products', Products)
         app.component('ElImageI18n', ElImageI18n)
         app.component('Carousel', Carousel)
-        app.component('CollapseMenu', CollapseMenu)
+        app.component('ElTabMenus', ElTabMenus)
 
         if (typeof window !== "undefined") {
             // 在浏览器环境下执行 sessionStorage 相关操作

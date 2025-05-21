@@ -10,7 +10,7 @@ next:
 
 # **视频OSD水印说明**
 
-![OSD图片.png](/articles/视频OSD水印说明/OSD图片.png )
+![OSD图片](/articles/视频OSD水印说明/OSD图片.png )
 
 ## 1、 第一行
 

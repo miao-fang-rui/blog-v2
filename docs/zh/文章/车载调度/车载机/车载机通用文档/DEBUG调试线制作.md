@@ -12,7 +12,7 @@ next:
 
 ## **1、DEBUG口定义** 
 
-![车载机debug接口.png](/articles/DEBUG调试线制作/车载机debug接口.png )
+![车载机debug接口](/articles/DEBUG调试线制作/车载机debug接口.png )
 
 <table>
   <tbody>
@@ -56,9 +56,9 @@ next:
 
 ## **2、转接线制作**
 
-![RS232串口定义.png](/articles/DEBUG调试线制作/RS232串口定义.png )
+![RS232串口定义](/articles/DEBUG调试线制作/RS232串口定义.png )
 
-![RS232串口定义2.png](/articles/DEBUG调试线制作/RS232串口定义2.png )
+![RS232串口定义2](/articles/DEBUG调试线制作/RS232串口定义2.png )
 
 DB9接口主要用到的是`2、3、5`引脚。其中：
 
@@ -80,11 +80,11 @@ DB9接口主要用到的是`2、3、5`引脚。其中：
 
 把做好的串口转接线、电脑上的串口和车载机的DEBUG接口连接起来，打开串口软件进行设置，例如：`MobaXterm.exe`（`XSHELL`也可以）。
 
-.![MobaXterm.png](/articles/DEBUG调试线制作/MobaXterm.png =300x)
+.![MobaXterm](/articles/DEBUG调试线制作/MobaXterm.png =300x)
 
-![串口数据软件设置.png](/articles/DEBUG调试线制作/串口数据软件设置.png )
+![串口数据软件设置](/articles/DEBUG调试线制作/串口数据软件设置.png )
 
-![串口数据.png](/articles/DEBUG调试线制作/串口数据.png )
+![串口数据](/articles/DEBUG调试线制作/串口数据.png )
 
 有打印输出说明制作的串口转接线是正常的。
 
