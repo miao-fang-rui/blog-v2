@@ -83,16 +83,18 @@ const onSubmit = () => {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--vp-c-bg-alt);
 
     .login {
-        border: 1px solid var(--vp-c-border);
-        padding: 100px;
+        border: 1px solid var(--vp-c-gutter);
+        padding: 80px 120px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin: auto;
         border-radius: 4px;
+        background-color: var(--vp-c-bg);
 
         .login-title {
             font-size: 28px;
