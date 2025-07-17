@@ -12,6 +12,7 @@ import Edit from './components/Edit.vue'
 import Login from './components/Login.vue'
 import Carousel from './components/Carousel.vue'
 import ElTabMenus from './components/ElTabMenus.vue'
+import { printPlugin } from 'vue-print-next';
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
@@ -19,6 +20,19 @@ export default defineClientConfig({
         for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
             app.component(key, component)
         }
+        app.use(printPlugin, {
+            // 可选配置项
+            // 例如：设置打印样式
+            style: `
+                @page {
+                    size: A4;
+                    margin: 20mm;
+                }
+                body {
+                    font-family: Arial, sans-serif;
+                }
+            `
+        });
         app.component('Products', Products)
         app.component('ElImageI18n', ElImageI18n)
         app.component('Carousel', Carousel)

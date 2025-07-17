@@ -7,60 +7,60 @@ import Sidebar from '../icons/Sidebar.vue'
 import DownloadIcon from '../icons/DownloadIcon.vue'
 import GoBack404 from '../icons/GoBack404.vue'
 
-import { ElMessageBox, ElMessage } from 'element-plus'
-import { usePageData } from 'vuepress/client'
+// import { ElMessageBox, ElMessage } from 'element-plus'
+// import { usePageData } from 'vuepress/client'
 import { useRouter } from 'vue-router'
-import { useDarkMode } from '@theme/useDarkMode'
+// import { useDarkMode } from '@theme/useDarkMode'
 
-let html2canvas, jsPDF;
+// let html2canvas, jsPDF;
 
-if (typeof window !== 'undefined') {
-  import('html2canvas').then(module => {
-    html2canvas = module.default;
-  });
-  import('jspdf').then(module => {
-    jsPDF = module.jsPDF;
-  });
-}
+// if (typeof window !== 'undefined') {
+//   import('html2canvas').then(module => {
+//     html2canvas = module.default;
+//   });
+//   import('jspdf').then(module => {
+//     jsPDF = module.jsPDF;
+//   });
+// }
 
-const isDarkMode = useDarkMode()
+// const isDarkMode = useDarkMode()
 const router = useRouter()
-const page = usePageData()
+// const page = usePageData()
 const sideIsShow = ref(true)
 const topIsShow = ref(true)
 
-const html2pdf = () => {
-  if (typeof window !== 'undefined' && html2canvas && jsPDF) {
-    html2canvas(document.querySelector('.vp-page [vp-content]'), {
-      backgroundColor: isDarkMode.value ? 'black' : 'white',
-      dpi: 500, // 设置图片的 dpi（每英寸像素数）
-      scale: 2
-    }).then(function (canvas) {
-      let pdf = new jsPDF('p', 'mm', 'a4'); // 创建A4大小的PDF
-      let ctx = canvas.getContext('2d', { willReadFrequently: true });
-      let a4w = 190;
-      let a4h = 270; // A4 大小，210mm x 297mm，四边各保留 10mm 的边距，显示区域 190x277，
-      let imgHeight = Math.floor((a4h * canvas.width) / a4w);  // 按 A4显示比例换算一页图像的像素高度
-      let renderedHeight = 0;
+// const html2pdf = () => {
+//   if (typeof window !== 'undefined' && html2canvas && jsPDF) {
+//     html2canvas(document.querySelector('.vp-page [vp-content]'), {
+//       backgroundColor: isDarkMode.value ? 'black' : 'white',
+//       dpi: 500, // 设置图片的 dpi（每英寸像素数）
+//       scale: 2
+//     }).then(function (canvas) {
+//       let pdf = new jsPDF('p', 'mm', 'a4'); // 创建A4大小的PDF
+//       let ctx = canvas.getContext('2d', { willReadFrequently: true });
+//       let a4w = 190;
+//       let a4h = 270; // A4 大小，210mm x 297mm，四边各保留 10mm 的边距，显示区域 190x277，
+//       let imgHeight = Math.floor((a4h * canvas.width) / a4w);  // 按 A4显示比例换算一页图像的像素高度
+//       let renderedHeight = 0;
 
-      // 按照A4大小进行分页渲染
-      while (renderedHeight < canvas.height) {
-        let page = document.createElement('canvas');
-        page.width = canvas.width;
-        page.height = Math.min(imgHeight, canvas.height - renderedHeight); // 可能内容不足一页
-        // 用 getImageData 剪裁指定区域，并画到前面创建的 canvas 对象中
-        page.getContext('2d', { willReadFrequently: true }).putImageData(ctx.getImageData(0, renderedHeight, canvas.width, Math.min(imgHeight, canvas.height - renderedHeight)), 0, 0);
-        pdf.addImage(page.toDataURL('image/jpeg', 0.2), 'JPEG', 10, 10, a4w, Math.min(a4h, (a4w * page.height) / page.width)); // 添加图像到页面，保留 10mm 边距
-        renderedHeight += imgHeight;
-        if (renderedHeight < canvas.height) pdf.addPage(); // 如果后面还有内容，添加一个空页
-      }
+//       // 按照A4大小进行分页渲染
+//       while (renderedHeight < canvas.height) {
+//         let page = document.createElement('canvas');
+//         page.width = canvas.width;
+//         page.height = Math.min(imgHeight, canvas.height - renderedHeight); // 可能内容不足一页
+//         // 用 getImageData 剪裁指定区域，并画到前面创建的 canvas 对象中
+//         page.getContext('2d', { willReadFrequently: true }).putImageData(ctx.getImageData(0, renderedHeight, canvas.width, Math.min(imgHeight, canvas.height - renderedHeight)), 0, 0);
+//         pdf.addImage(page.toDataURL('image/jpeg', 0.2), 'JPEG', 10, 10, a4w, Math.min(a4h, (a4w * page.height) / page.width)); // 添加图像到页面，保留 10mm 边距
+//         renderedHeight += imgHeight;
+//         if (renderedHeight < canvas.height) pdf.addPage(); // 如果后面还有内容，添加一个空页
+//       }
 
-      pdf.save(page.value.title + '.pdf');
-    }).catch(function (error) {
-      console.error('html2canvas error:', error);
-    });
-  }
-}
+//       pdf.save(page.value.title + '.pdf');
+//     }).catch(function (error) {
+//       console.error('html2canvas error:', error);
+//     });
+//   }
+// }
 
 const handleSide = () => {
   sideIsShow.value = !sideIsShow.value
@@ -87,35 +87,37 @@ const handleTop = () => {
   }
 }
 
-const handleDownload = () => {
-  if (typeof window !== 'undefined') {
-    ElMessageBox.confirm('确认下载本页面文档 - [ ' + page.value.title + '.pdf' + ' ], 是否继续?', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning',
-    }).then(() => {
-      const sidebar = document.querySelector('.vp-sidebar')
-      if (sidebar) {
-        const isNoSidebar = sidebar.classList.contains('no-sidebar')
-        if (!isNoSidebar) {
-          sidebar.classList.add('no-sidebar')
-          html2pdf()
-          sidebar.classList.remove('no-sidebar')
-        } else {
-          html2pdf()
-        }
+// const handleDownload = () => {
+//   if (typeof window !== 'undefined') {
+//     ElMessageBox.confirm('确认下载本页面文档 - [ ' + page.value.title + '.pdf' + ' ], 是否继续?', '提示', {
+//       confirmButtonText: '确定',
+//       cancelButtonText: '取消',
+//       type: 'warning',
+//     }).then(() => {
+//       const sidebar = document.querySelector('.vp-sidebar')
+//       if (sidebar) {
+//         const isNoSidebar = sidebar.classList.contains('no-sidebar')
+//         if (!isNoSidebar) {
+//           sidebar.classList.add('no-sidebar')
+//           // html2pdf()
+//           console.log('下载文档')
+//           sidebar.classList.remove('no-sidebar')
+//         } else {
+//           // html2pdf()
+//           console.log('下载文档')
+//         }
 
-        ElMessage.success({
-          message: '导出成功，请等待浏览器下载！',
-          type: 'success',
-        })
-      }
+//         ElMessage.success({
+//           message: '导出成功，请等待浏览器下载！',
+//           type: 'success',
+//         })
+//       }
 
-    }).catch(() => {
-      ElMessage('取消下载！')
-    })
-  }
-}
+//     }).catch(() => {
+//       ElMessage('取消下载！')
+//     })
+//   }
+// }
 
 const toggleTopBar = () => {
   handleTop()
@@ -165,12 +167,18 @@ function goBack() {
               <div class="line"></div>
             </div>
             <div class="tip">
-              <el-button class="tip-btn" text @click="handleDownload()">
+              <el-button class="tip-btn" text v-print="'.vp-page [vp-content]'" >
                 <el-icon :size="20">
                   <DownloadIcon />
                 </el-icon>
                 <span>下载本页文档</span>
               </el-button>
+              <!-- <el-button class="tip-btn" text @click="handleDownload()">
+                <el-icon :size="20">
+                  <DownloadIcon />
+                </el-icon>
+                <span>下载本页文档</span>
+              </el-button> -->
             </div>
           </template>
         </el-popover>
