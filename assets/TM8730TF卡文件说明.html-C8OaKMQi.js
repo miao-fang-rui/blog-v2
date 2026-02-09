@@ -1,0 +1,11 @@
+import{_ as n,c as e,e as s,o as i}from"./app-DDk-WQeV.js";const l={};function t(r,a){return i(),e("div",null,[...a[0]||(a[0]=[s(`<h1 id="tm8730-tf卡文件说明" tabindex="-1"><a class="header-anchor" href="#tm8730-tf卡文件说明"><span>TM8730 TF卡文件说明</span></a></h1><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">TF卡</span>
+<span class="line"> ├─ bzqmp3 ----------------- 语音文件</span>
+<span class="line"> |   ├─ B1 ----------------- 语音线路</span>
+<span class="line"> |   ├─ ... ---------------- n条语音线路</span>
+<span class="line"> |   └─ B2 ----------------- 语音线路</span>
+<span class="line"> └─ SYS -------------------- 系统使用的资源文件</span>
+<span class="line">     ├─ FONT --------------- 字体</span>
+<span class="line">     ├─ MCU</span>
+<span class="line">     ├─ PIC ---------------- 图片</span>
+<span class="line">     └─ TSY ---------------- 提示音语音文件</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,2)])])}const c=n(l,[["render",t]]),m=JSON.parse('{"path":"/zh/%E6%96%87%E7%AB%A0/%E8%BD%A6%E8%BD%BD%E8%B0%83%E5%BA%A6/%E8%BD%A6%E8%BD%BD%E6%9C%BA/TM8730/TM8730TF%E5%8D%A1%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E.html","title":"TM8730 TF卡文件说明","lang":"zh-CN","frontmatter":{"sidebar":"heading","prev":{"text":"无","link":"无"},"next":{"text":"无","link":"无"}},"headers":[],"git":{"updatedTime":1747827589000,"contributors":[{"name":"miao-fang-rui","username":"miao-fang-rui","email":"miaofangrui@163.com","commits":2,"url":"https://github.com/miao-fang-rui"}],"changelog":[{"hash":"aad1a26a93b1936702a4794f76298f2f0a18a6ea","date":1747827589000,"email":"miaofangrui@163.com","author":"miao-fang-rui","message":"修改调试"},{"hash":"3b64240ed5f27839b04b7d0d8349f89e779c4368","date":1747741924000,"email":"miaofangrui@163.com","author":"miao-fang-rui","message":"调试及维修"}]},"filePathRelative":"zh/文章/车载调度/车载机/TM8730/TM8730TF卡文件说明.md"}');export{c as comp,m as data};
