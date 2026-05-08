@@ -64,7 +64,7 @@ const handleColorChange = (value) => {
 </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .color-picker {
     position: relative !important;
