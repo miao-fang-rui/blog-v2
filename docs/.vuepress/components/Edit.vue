@@ -2,6 +2,7 @@
 import { ref, watch, onUnmounted, onMounted, toRaw } from 'vue'
 import { useResizeObserver } from '@vueuse/core'
 import { useEditor, EditorContent, VueNodeViewRenderer } from '@tiptap/vue-3'
+import FileHandler from '@tiptap/extension-file-handler'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
@@ -101,7 +102,48 @@ const editor = useEditor({
         TableCell,
         ResizableImage.configure({ inline: true, allowBase64: true, HTMLAttributes: { class: 'custom-image' } }),
         MarkdownOutputExtension,
-        CharacterCount
+        CharacterCount,
+        FileHandler.configure({
+            allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
+            onDrop: (currentEditor, files, pos) => {
+                files.forEach(file => {
+                    const fileReader = new FileReader()
+
+                    fileReader.readAsDataURL(file)
+                    fileReader.onload = () => {
+                        currentEditor
+                        .chain()
+                        .insertContentAt(pos, {
+                            type: 'image',
+                            attrs: {
+                            src: fileReader.result,
+                            },
+                        })
+                        .focus()
+                        .run()
+                    }
+                })
+            },
+            onPaste: (currentEditor, files) => {
+                files.forEach(file => {
+                    const fileReader = new FileReader()
+
+                    fileReader.readAsDataURL(file)
+                    fileReader.onload = () => {
+                        currentEditor
+                        .chain()
+                        .insertContentAt(currentEditor.state.selection.anchor, {
+                            type: 'ResizableImage',
+                            attrs: {
+                            src: fileReader.result,
+                            },
+                        })
+                        .focus()
+                        .run()
+                    }
+                })
+            }
+        })
     ],
     onUpdate: () => {
         content.value = editor.value.getJSON()
@@ -157,7 +199,7 @@ const editor = useEditor({
     },
     onTransaction({ editor, transaction }) {
     },
-    onPaste(event, slice) {
+    onPaste: (currentEditor, files) => {
     },
     editorProps: {
         transformPastedHTML(html) {
