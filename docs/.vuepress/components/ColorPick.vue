@@ -71,10 +71,10 @@ const handleColorChange = (value) => {
 
 <style lang="scss">
 .color-picker {
-    position: relative;
+    position: relative !important;
 
     .color-input {
-        position: absolute;
+        position: absolute !important;
         bottom: -6px;
         left: 10%;
         
