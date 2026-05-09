@@ -48,6 +48,7 @@ import DeleteIcon from '../icons/DeleteIcon.vue'
 import TipIcon from '../icons/TipIcon.vue'
 import Pencil from '../icons/Pencil.vue'
 import PaletteLine from '../icons/PaletteLine.vue'
+import ZoomIn from '../icons/ZoomIn.vue'
 
 export {
     Bold,
@@ -99,5 +100,6 @@ export {
     DeleteIcon,
     TipIcon,
     Pencil,
-    PaletteLine
+    PaletteLine,
+    ZoomIn
 }

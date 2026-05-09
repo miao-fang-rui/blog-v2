@@ -2,7 +2,7 @@
 import { reactive, ref, nextTick } from 'vue'
 import MenuButton from './MenuButton.vue'
 import { BubbleMenu } from '@tiptap/vue-3'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElImage  } from 'element-plus'
 import { 
     ImageIcon, 
     LeftTextAlign, 
@@ -12,8 +12,13 @@ import {
     CustomWidthIcon, 
     BlockIcon, 
     inlineBlockIcon, 
-    DeleteIcon 
+    DeleteIcon,
+    ZoomIn
 } from '../icons/icons'
+
+// 图片预览
+const showPreview = ref(false)
+const previewSrc = ref('')
 
 
 const { editor } = defineProps({
@@ -99,11 +104,27 @@ const imageButtons = [
     { type: 'divider', direction: 'vertical' },
     {
         type: 'button', 
+        tipContent: '预览', 
+        handleClick: () => handlePreviewImage(),
+        icon: ZoomIn
+    },
+    { type: 'divider', direction: 'vertical' },
+    {
+        type: 'button', 
         tipContent: '删除', 
         handleClick: () => editor.chain().focus().deleteSelection().run(),
         icon: DeleteIcon 
     }
 ]
+
+const handlePreviewImage = () => {
+    const attrs = editor.getAttributes('ResizableImage')
+    console.log(attrs)
+    if (attrs?.src) {
+        previewSrc.value = attrs.src
+        showPreview.value = true
+    }
+}
 
 
 
@@ -247,6 +268,16 @@ const handleSetImageSize = () => {
                 </div>
             </template>
         </el-dialog>
+        <!-- Element Plus 图片大图预览 -->
+        <el-image-viewer
+            v-if="showPreview"
+            :src="previewSrc"
+            :url-list="[previewSrc,]"
+            z-index="99999"
+            teleported
+            hide-on-click-modal
+            @close="showPreview = false"
+        />
     </div>
 </template>
 
