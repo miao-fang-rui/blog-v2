@@ -30,6 +30,7 @@ const article = reactive({
         link: '',
     },
     title: '',
+    articlePath: 'display',
     imgSrc: '',
 })
 
@@ -128,6 +129,19 @@ const handleNextChange = (value) => {
 }
 
 const handleSettingSave = async(formEl) => {
+    if(article.articlePath === 'hide'){
+        localStorage.setItem('blog', JSON.stringify({
+            'title': article.title,
+            'imgSrc': '',
+            'prev': { 'text': '', 'link': '' },
+            'next': { 'text': '', 'link': '' },
+            'articlePath': article.articlePath,
+        }))
+        ElMessage({ message: '保存成功！', type: 'success' })
+        dialogVisible.value = false
+        return
+    }
+
     if (!formEl) return
     await formEl.validate((valid, fields) => {
         if (valid) {
@@ -136,6 +150,7 @@ const handleSettingSave = async(formEl) => {
                 'imgSrc': article.imgSrc,
                 'prev': { 'text': article.prev.text, 'link': article.prev.link },
                 'next': { 'text': article.next.text, 'link': article.next.link },
+                'articlePath': article.articlePath,
             }))
             ElMessage({ message: '保存成功！', type: 'success' })
             dialogVisible.value = false
@@ -150,10 +165,10 @@ onMounted(() => {
     if (!blogData) return;
 
     const articleLocalStorage = JSON.parse(blogData);
-    const { title, imgSrc, prev, next } = articleLocalStorage;
+    const { title, imgSrc, prev, next, articlePath } = articleLocalStorage;
 
     // 更新文章基本信息
-    Object.assign(article, { title, imgSrc, prev, next });
+    Object.assign(article, { title, imgSrc, prev, next, articlePath });
 
     // 路径处理函数
     const processNavPath = (path, type) => {
@@ -194,77 +209,86 @@ onMounted(() => {
     <el-form-item label="标题" prop="title">
         <el-input v-model="article.title" placeholder="标题" />
     </el-form-item>
-    <el-form-item label="图片目录" class="picture-item" prop="imgSrc">
-        <el-row :gutter="4" style="width:100%">
-            <el-col :span="5">
-                <el-select @clear="handlePictureClear" @change="handlePictureSelect" clearable placeholder="分类" v-model="articlePictureText" popper-class="link-text-select" style="width: 115px;">
-                    <el-option label="产品列表" value="产品" />
-                    <el-option label="调试维修" value="调试维修" />
-                </el-select>
-            </el-col>
-            <el-col :offset="0" :span="19">
-                <el-cascader 
-                    v-model="articlePictureOptions"
-                    :options="products" 
-                    :props="{ expandTrigger: 'hover' }"
-                    popper-class="cascader-props picture-cascader"
-                    placeholder="图片目录"
-                    clearable 
-                    @change="handlePictureChange"
-                />
-            </el-col>
-        </el-row>
+    <el-form-item label="设置图片和文章路径" prop="articlePath">
+        <el-select v-model="article.articlePath" placeholder="设置图片和文章路径" popper-class="link-text-select">
+            <el-option label="设置" value="display" />
+            <el-option label="不设置" value="hide" />
+        </el-select>
     </el-form-item>
-    <el-form-item label="上一篇文章" class="prev-article" prop="prev.text">
-        <el-row :gutter="5" style="width:100%">
-            <el-col :span="8">
-                <el-input placeholder="标题" v-model="article.prev.text" />
-            </el-col>
-            <el-col :span="4">
-                <el-select @clear="handlePrevClear" @change="handlePrevSelect" clearable placeholder="分类" v-model="articlePrevText" popper-class="link-text-select">
-                    <el-option label="产品目录" value="产品目录" />
-                    <el-option label="产品列表" value="产品列表" />
-                    <el-option label="调试维修" value="调试维修" />
-                </el-select>
-            </el-col>
-            <el-col :span="12">
-                <el-cascader
-                    v-model="prevLinkOptions"
-                    :options="articlePrevText === '产品目录'? productClassification: products" 
-                    :props="{ expandTrigger: 'hover' }"
-                    popper-class="cascader-props"
-                    clearable
-                    placeholder="链接"
-                    @change="handlePrevChange"
-                />
-            </el-col>
-        </el-row>
-    </el-form-item>
-    <el-form-item label="下一篇文章" class="next-article" prop="next.text">
-        <el-row :gutter="5" style="width:100%">
-            <el-col :span="8">
-                <el-input placeholder="标题" v-model="article.next.text" />
-            </el-col>
-            <el-col :span="4">
-                <el-select @clear="handleNextClear" @change="handleNextSelect" clearable placeholder="分类" v-model="articleNextText" popper-class="link-text-select">
-                    <el-option label="产品目录" value="产品目录" />
-                    <el-option label="产品列表" value="产品列表" />
-                    <el-option label="调试维修" value="调试维修" />
-                </el-select>
-            </el-col>
-            <el-col :span="12">
-                <el-cascader
-                    v-model="nextLinkOptions"
-                    :options="articleNextText === '产品目录'? productClassification: products" 
-                    :props="{ expandTrigger: 'hover' }"
-                    popper-class="cascader-props"
-                    clearable
-                    placeholder="链接"
-                    @change="handleNextChange"
-                />
-            </el-col>
-        </el-row>
-    </el-form-item>
+    <template v-if="article.articlePath === 'display'">
+        <el-form-item label="图片目录" class="picture-item" prop="imgSrc">
+            <el-row :gutter="4" style="width:100%">
+                <el-col :span="5">
+                    <el-select @clear="handlePictureClear" @change="handlePictureSelect" clearable placeholder="分类" v-model="articlePictureText" popper-class="link-text-select" style="width: 115px;">
+                        <el-option label="产品列表" value="产品" />
+                        <el-option label="调试维修" value="调试维修" />
+                    </el-select>
+                </el-col>
+                <el-col :offset="0" :span="19">
+                    <el-cascader 
+                        v-model="articlePictureOptions"
+                        :options="products" 
+                        :props="{ expandTrigger: 'hover' }"
+                        popper-class="cascader-props picture-cascader"
+                        placeholder="图片目录"
+                        clearable 
+                        @change="handlePictureChange"
+                    />
+                </el-col>
+            </el-row>
+        </el-form-item>
+        <el-form-item label="上一篇文章" class="prev-article" prop="prev.text">
+            <el-row :gutter="5" style="width:100%">
+                <el-col :span="8">
+                    <el-input placeholder="标题" v-model="article.prev.text" />
+                </el-col>
+                <el-col :span="4">
+                    <el-select @clear="handlePrevClear" @change="handlePrevSelect" clearable placeholder="分类" v-model="articlePrevText" popper-class="link-text-select">
+                        <el-option label="产品目录" value="产品目录" />
+                        <el-option label="产品列表" value="产品列表" />
+                        <el-option label="调试维修" value="调试维修" />
+                    </el-select>
+                </el-col>
+                <el-col :span="12">
+                    <el-cascader
+                        v-model="prevLinkOptions"
+                        :options="articlePrevText === '产品目录'? productClassification: products" 
+                        :props="{ expandTrigger: 'hover' }"
+                        popper-class="cascader-props"
+                        clearable
+                        placeholder="链接"
+                        @change="handlePrevChange"
+                    />
+                </el-col>
+            </el-row>
+        </el-form-item>
+        <el-form-item label="下一篇文章" class="next-article" prop="next.text">
+            <el-row :gutter="5" style="width:100%">
+                <el-col :span="8">
+                    <el-input placeholder="标题" v-model="article.next.text" />
+                </el-col>
+                <el-col :span="4">
+                    <el-select @clear="handleNextClear" @change="handleNextSelect" clearable placeholder="分类" v-model="articleNextText" popper-class="link-text-select">
+                        <el-option label="产品目录" value="产品目录" />
+                        <el-option label="产品列表" value="产品列表" />
+                        <el-option label="调试维修" value="调试维修" />
+                    </el-select>
+                </el-col>
+                <el-col :span="12">
+                    <el-cascader
+                        v-model="nextLinkOptions"
+                        :options="articleNextText === '产品目录'? productClassification: products" 
+                        :props="{ expandTrigger: 'hover' }"
+                        popper-class="cascader-props"
+                        clearable
+                        placeholder="链接"
+                        @change="handleNextChange"
+                    />
+                </el-col>
+            </el-row>
+        </el-form-item>
+    </template>
+    
     <el-form-item class="button-form-item">
         <el-button @click="handleSettingSave(ruleFormRef)" color="#5a72fe" type="primary" class="setting-button">
             确定

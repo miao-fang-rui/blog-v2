@@ -166,7 +166,14 @@ next:
 }
 
 const getPdfFile = () => {
-    console.log('getPdf')
+    dialogVisible.value = false
+    // console.log('getPdf')
+    setTimeout(() => {
+        window.print()
+    }, 100) // 100ms 足够 Vue 完成 DOM 更新
+
+    // window.print()
+
     // const markdown = editor.commands.outputMarkdown()
     // const markdown = converseImages(editor.commands.outputMarkdown())
     // console.log(markdown)
@@ -182,7 +189,7 @@ const getPdfFile = () => {
         :width="width" 
         :title="title"
         append-to-body
-        class="my-style-dialog"
+        class="my-style-dialog no-print"
         :before-close="dialogBeforeClose"
     >
         <div v-show="name === 'sourceCode'" class="sourceCode">
@@ -325,5 +332,20 @@ const getPdfFile = () => {
         box-shadow: 0 0 0 1px var(--vp-c-border) inset;
         color: var(--vp-c-text);
     }
+}
+
+@media print {
+  /* 强制隐藏所有弹窗、遮罩、对话框 */
+  .el-dialog,
+  .el-overlay,
+  .el-dialog__wrapper {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  /* 隐藏你自己的弹窗容器 */
+  .no-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
 }
 </style>
