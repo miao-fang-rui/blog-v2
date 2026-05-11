@@ -65,6 +65,18 @@ watch(headerHeight, (newVal) => {
     }
 })
 
+// 工具函数：生成 20260511-193735 格式时间戳
+function getDateTimeFileName() {
+  const date = new Date()
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+  return `${year}${month}${day}-${hours}${minutes}${seconds}`
+}
+
 const editor = useEditor({
     content: "",
     autofocus: true,
@@ -106,6 +118,7 @@ const editor = useEditor({
         FileHandler.configure({
             allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
             onDrop: (currentEditor, files, pos) => {
+                const titleName = `${getDateTimeFileName()}.png`
                 files.forEach(file => {
                     const fileReader = new FileReader()
 
@@ -116,7 +129,10 @@ const editor = useEditor({
                         .insertContentAt(pos, {
                             type: 'image',
                             attrs: {
-                            src: fileReader.result,
+                                src: fileReader.result,
+                                alt: titleName,
+                                // title默认用当前年月日时分秒.png格式(例如：20260511-193735.png)
+                                title: titleName,
                             },
                         })
                         .focus()
@@ -125,6 +141,7 @@ const editor = useEditor({
                 })
             },
             onPaste: (currentEditor, files) => {
+                const titleName = `${getDateTimeFileName()}.png`
                 files.forEach(file => {
                     const fileReader = new FileReader()
 
@@ -135,7 +152,9 @@ const editor = useEditor({
                         .insertContentAt(currentEditor.state.selection.anchor, {
                             type: 'ResizableImage',
                             attrs: {
-                            src: fileReader.result,
+                                src: fileReader.result,
+                                alt: titleName,
+                                title: titleName,
                             },
                         })
                         .focus()
