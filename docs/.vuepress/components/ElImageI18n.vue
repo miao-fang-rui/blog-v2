@@ -13,6 +13,10 @@ const props = defineProps({
     title: String,
     previewTeleported: String,
     srcTb: String,
+    lazy: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const loadingText = computed(() =>
@@ -73,13 +77,14 @@ const getErrorStyle = computed(() => {
             };
     }
 });
+
 </script>
 
 <template>
 
     <el-image 
-        lazy
-        :src="props.srcTb ?? props.src" 
+        :lazy="props.lazy"
+        :src="props.srcTb?? props.src" 
         :alt="props.alt ?? props.title" 
         :title="props.title" 
         fit="contain" 

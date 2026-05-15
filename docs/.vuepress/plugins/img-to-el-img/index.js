@@ -8,8 +8,11 @@ export const imgToElImgPlugin = (options) => (app) => ({
             const height = token?.attrGet('height')? token?.attrGet('height')+ 'px' : '100%';
             const alt = token.content
 
+            const thumbSrc = env.base + token.attrGet('src').replace('/%E4%BA%A7%E5%93%81/', '/thumb/')
+
             return `<ElImageI18n 
                         src="${src}" 
+                        srcTb="${thumbSrc}"
                         alt="${alt}"
                         title="${alt}"
                         width="${width}"

@@ -8,7 +8,9 @@ const props = defineProps(['height','pictures', 'motionBlur'])
     <el-carousel :motion-blur="props.motionBlur"  :height="props.height" indicator-position="outside" style="margin: 20px 0;">
         <el-carousel-item v-for="item in props.pictures" :key="item" :label="item.label">
             <ElImageI18n 
+                :lazy="false"
                 :src="item.src" 
+                :srcTb="item.srcTb"
                 :alt="item.name"
                 :title="item.name"
                 width="100%"
