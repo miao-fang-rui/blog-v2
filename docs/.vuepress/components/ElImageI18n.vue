@@ -11,7 +11,8 @@ const props = defineProps({
     height: String,
     alt: String,
     title: String,
-    previewTeleported: String
+    previewTeleported: String,
+    srcTb: String,
 })
 
 const loadingText = computed(() =>
@@ -77,7 +78,8 @@ const getErrorStyle = computed(() => {
 <template>
 
     <el-image 
-        :src="props.src" 
+        lazy
+        :src="props.srcTb ?? props.src" 
         :alt="props.alt ?? props.title" 
         :title="props.title" 
         fit="contain" 

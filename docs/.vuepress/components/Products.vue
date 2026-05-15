@@ -11,6 +11,7 @@ const props = defineProps(['product'])
             <ElImageI18n 
                 type="list"
                 :src="p.src" 
+                :srcTb="p.srcTb"
                 :alt="p.name"
                 :title="p.name"
                 width="100%"
