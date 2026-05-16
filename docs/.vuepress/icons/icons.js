@@ -49,6 +49,8 @@ import TipIcon from '../icons/TipIcon.vue'
 import Pencil from '../icons/Pencil.vue'
 import PaletteLine from '../icons/PaletteLine.vue'
 import ZoomIn from '../icons/ZoomIn.vue'
+import Moon from '../icons/Moon.vue'
+import Sun from '../icons/Sun.vue'
 
 export {
     Bold,
@@ -101,5 +103,7 @@ export {
     TipIcon,
     Pencil,
     PaletteLine,
-    ZoomIn
+    ZoomIn,
+    Moon,
+    Sun
 }

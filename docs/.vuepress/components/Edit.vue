@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onUnmounted, onMounted, toRaw } from 'vue'
-import { useResizeObserver } from '@vueuse/core'
+import { useResizeObserver, useToggle, useDark } from '@vueuse/core'
 import { useEditor, EditorContent, VueNodeViewRenderer } from '@tiptap/vue-3'
 import FileHandler from '@tiptap/extension-file-handler'
 import StarterKit from '@tiptap/starter-kit'
@@ -36,10 +36,14 @@ import CharacterCount from '@tiptap/extension-character-count'
 import GoBack404 from '../icons/GoBack404.vue'
 import { useRouter } from 'vue-router'
 import Sidebar from '../icons/Sidebar.vue'
+import Moon from '../icons/Moon.vue'
+import Sun from '../icons/Sun.vue'
 
 import Menubar from './Menubar.vue'
 import Navigat from './Navigat.vue'
 
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 const router = useRouter()
 const lowlight = createLowlight(all)
 lowlight.register('html', html)
@@ -306,6 +310,11 @@ onMounted(() => {
 onUnmounted(() => {
     editor.value.destroy()
 })
+
+// 核心：切换时同步修改 data-theme
+watch(isDark, (dark) => {
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+}, { immediate: true })
 </script>
 
 <template>
@@ -321,14 +330,26 @@ onUnmounted(() => {
                 </el-main>
             </el-container>
             <div class="right-btn no-print">
-                <div class="go-back">
+                <div class="light-dark">
+                    <el-tooltip :content="isShowNavigit? '白天': '黑夜'" placement="left" :show-after="200">
+                        <el-button class="more-btn" text bg circle @click="toggleDark()"><el-icon :size="20">
+                            <template v-if="!isDark">
+                                <Sun />
+                            </template>
+                            <template v-else>
+                                <Moon />
+                            </template>
+                        </el-icon></el-button>
+                    </el-tooltip>
+                </div>
+                <div class="hide-side">
                     <el-tooltip :content="isShowNavigit? '隐藏导航栏': '显示导航栏'" placement="left" :show-after="200">
                         <el-button class="more-btn" text bg circle @click="handleSide"><el-icon :size="20">
                             <Sidebar />
                         </el-icon></el-button>
                     </el-tooltip>
                 </div>
-                <div class="hide-side">
+                <div class="go-back">
                     <el-tooltip content="返回上一页" placement="left" :show-after="200">
                         <el-button class="more-btn" text bg circle @click="goBack"><el-icon :size="20">
                             <GoBack404 />
@@ -427,6 +448,14 @@ onUnmounted(() => {
         flex-direction: column;
 
         .hide-side {
+            margin-top: 10px;
+        }
+        
+        .go-back {
+            margin-top: 10px;
+        }
+
+        .light-dark {
             margin-top: 10px;
         }
 
