@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onUnmounted, onMounted, toRaw } from 'vue'
-import { useResizeObserver, useToggle, useDark } from '@vueuse/core'
+import { useResizeObserver } from '@vueuse/core'
+import { useDarkMode } from '@vuepress/theme-default/lib/client/composables/useDarkMode'
 import { useEditor, EditorContent, VueNodeViewRenderer } from '@tiptap/vue-3'
 import FileHandler from '@tiptap/extension-file-handler'
 import StarterKit from '@tiptap/starter-kit'
@@ -42,8 +43,6 @@ import Sun from '../icons/Sun.vue'
 import Menubar from './Menubar.vue'
 import Navigat from './Navigat.vue'
 
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
 const router = useRouter()
 const lowlight = createLowlight(all)
 lowlight.register('html', html)
@@ -311,10 +310,14 @@ onUnmounted(() => {
     editor.value.destroy()
 })
 
-// 核心：切换时同步修改 data-theme
-watch(isDark, (dark) => {
-  document.documentElement.dataset.theme = dark ? 'dark' : 'light'
-}, { immediate: true })
+// 获取 VuePress 官方暗黑模式（响应式）
+const isDark = useDarkMode()
+
+// 切换方法（和官方按钮完全一样，循环 light → dark → auto）
+function toggleDark() {
+  isDark.value = !isDark.value
+}
+
 </script>
 
 <template>
@@ -331,7 +334,7 @@ watch(isDark, (dark) => {
             </el-container>
             <div class="right-btn no-print">
                 <div class="light-dark">
-                    <el-tooltip :content="isShowNavigit? '白天': '黑夜'" placement="left" :show-after="200">
+                    <el-tooltip :content="!isDark? '白天': '黑夜'" placement="left" :show-after="200">
                         <el-button class="more-btn" text bg circle @click="toggleDark()"><el-icon :size="20">
                             <template v-if="!isDark">
                                 <Sun />
@@ -803,6 +806,10 @@ watch(isDark, (dark) => {
     .tiptap {
         p.is-editor-empty:first-child::before {
             color: #343434;
+        }
+
+        pre {
+            background: #1a1d28;
         }
     }
 }
