@@ -480,7 +480,8 @@ function toggleDark() {
 }
 
 :deep(.tiptap){
-    background-color: var(--vp-c-bg);
+    // background-color: var(--vp-c-bg);
+    background-color: #fff;
     box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--vp-c-border);
     min-height: 1024px;
@@ -804,12 +805,15 @@ function toggleDark() {
 <style lang="scss">
 [data-theme='dark'] {
     .tiptap {
+        background-color: #121212;
         p.is-editor-empty:first-child::before {
             color: #343434;
         }
 
         pre {
             background: #1a1d28;
+            border: none;
+            box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.9);
         }
     }
 }
