@@ -75,8 +75,9 @@ const handleColorChange = (value) => {
 
     .color-input {
         position: absolute !important;
-        bottom: -6px;
-        left: 10%;
+        // bottom: -6px;
+        bottom: 14px !important;
+        left: 10% !important;
         
         .el-color-picker__trigger {
             height: 5px;

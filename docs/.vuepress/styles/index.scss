@@ -6,6 +6,15 @@
     --vp-c-accent-text: var(--vp-c-white);
     --vp-c-accent-soft: rgb(16 185 129 / 14%);
 
+    .el-color-picker {
+        // outline: none;
+        width: 0px;
+        height: 0px;
+        // line-height: normal;
+        // display: inline-block;
+        // position: relative;
+    }
+
     h2 {
         border-top: none;
     }
