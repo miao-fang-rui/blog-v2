@@ -3,6 +3,7 @@
 import { ref, computed } from 'vue';
 import { Pencil } from '../icons/icons'
 import MenuButton from './MenuButton.vue';
+
 const { editor } = defineProps({
     editor: Object
 })
@@ -48,7 +49,7 @@ const handleColorChange = (value) => {
     color.value = value
     editor.chain().setColor(value).run()
 }
-    
+
 
 </script>
 
@@ -63,7 +64,14 @@ const handleColorChange = (value) => {
     >
         <template #icon>
             <Pencil />
-            <el-color-picker @active-change="handleColorChange" ref="colorInput" class="color-input" v-model="color" show-alpha :predefine="predefineColors" />
+            <el-color-picker 
+                @active-change="handleColorChange" 
+                ref="colorInput" 
+                class="color-input" 
+                v-model="color" 
+                show-alpha 
+                :predefine="predefineColors" 
+            />
         </template>
     </MenuButton>
 </div>
@@ -75,7 +83,6 @@ const handleColorChange = (value) => {
 
     .color-input {
         position: absolute !important;
-        // bottom: -6px;
         bottom: 14px !important;
         left: 10% !important;
         
